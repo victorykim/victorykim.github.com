@@ -17,10 +17,10 @@ title: Development Note
 email: kim.seungri@mintech.kr
 description: > # this means to ignore newlines until "baseurl:"
   Swift, RxSwift, RealmSwift, CoreBluetooth
-baseurl: "victorykim.io" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+# twitter_username: jekyllrb
+github_username:  VictoryKim
 
 # Build settings
 markdown: kramdown
