@@ -9,17 +9,53 @@ Observable 생성
 
 {% highlight swift %}
 
-// 1. Generic observable 생성
+// #1. Generic observable 생성
 let observable1: Observable<String> = Observable<String>.create({ observer in
-	observer.onNext("Next")             // 2. 이벤트 전송
-	observer.onError(error)             // 3. 에러 전송
-	observer.onCompleted()              // 4. observable completed 전송
-	return Disposables.create()         // 5. disposable 리턴
+	observer.onNext("Next")             // #2. 이벤트 전송
+	observer.onError(error)             // #3. 에러 전송
+	observer.onCompleted()              // #4. observable completed 전송
+	return Disposables.create()         // #5. disposable 리턴
 })
 {% endhighlight %}
 
-1. String 타입 Observable 생성
+\#1. String 타입 Observable 생성
 
 {% highlight swift %}
-Observable<String>.create(<#T##subscribe: (AnyObserver<String>) -> Disposable##(AnyObserver<String>) -> Disposable#>)
+Observable<String>.create(subscribe: (AnyObserver<String>) -> Disposable)
+
+#=>subscribe: observer를 parameter로 받고 Disposable을 리턴하는 closure parameter
 {% endhighlight %}
+
+\#2. 이벤트 전송
+{% highlight swift %}
+observer.onNext("Next")
+#=>observer 객체를 통해 "Next" 라는 문자열 이벤트를 전송
+{% endhighlight %}
+
+\#3. 에러 전송
+{% highlight swift %}
+observer.onError(error)
+#=>observer 객체를 통해 Error 전송
+{% endhighlight %}
+
+\#4. observable completed 전송
+{% highlight swift %}
+observer.onCompleted()
+#=>observer 객체를 통해 completed 전송
+{% endhighlight %}
+
+\#5. Disposable
+{% highlight swift %}
+return Disposables.create()
+#=>Disposable 리턴
+{% endhighlight %}
+
+
+Observable의 기본 Cycle을 요약하면
+
+1. Generic Type으로 Observable을 생성한다.
+2. Observer를 parameter로 받고 Disposable을 리턴하는 Closure를 구현
+3. 정상적인 이벤트 전송의 경우 observer.onNext(Generic Type)을 통해 전송
+4. 에러가 발생한 경우 observer.onError(error)를 통해 에러 전송
+5. Observable의 완료를 원하는 경우 observer.onCompleted() 실행
+6. 이벤트 완료 후 Disposable 리턴
