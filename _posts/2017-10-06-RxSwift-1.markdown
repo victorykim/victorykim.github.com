@@ -1,21 +1,25 @@
 ---
 layout: post
-title:  "RxSwift - 1"
+title:  "RxSwift - Observable"
 date:   2017-10-06 16:47:20 +0900
 categories: RxSwift
 ---
-##RxSwift - 1
-### Observables
 
-1. Observable 생성
+Observable 생성
 
 {% highlight swift %}
 
-// observable 생성
+// 1. Generic observable 생성
 let observable1: Observable<String> = Observable<String>.create({ observer in
-	observer.onNext("Next")             // 이벤트 전송
-	observer.onError(error)             // 에러 전송
-	observer.onCompleted()              // observable completed 전송
-	return Disposables.create()         // disposable 리턴
+	observer.onNext("Next")             // 2. 이벤트 전송
+	observer.onError(error)             // 3. 에러 전송
+	observer.onCompleted()              // 4. observable completed 전송
+	return Disposables.create()         // 5. disposable 리턴
 })
+{% endhighlight %}
+
+1. String 타입 Observable 생성
+
+{% highlight swift %}
+Observable<String>.create(<#T##subscribe: (AnyObserver<String>) -> Disposable##(AnyObserver<String>) -> Disposable#>)
 {% endhighlight %}
