@@ -19,15 +19,17 @@ deinit되는 순간 자동으로 Completed 이벤트를 발생한다.
 
 -
 
+<br>
 **Variable 생성**
 
 Generic Type으로 일반 변수 생성과 동일한 방식으로 생성하며 반드시 초기 값을 지정해야한다.
 
 {% highlight swift %}
 // Variable 생성
-let variable: Variable<String> = Variable<String>("variable")
+let variable: Variable<String> = Variable<String>("first")
 {% endhighlight %}
 
+<br>
 **Variable subscribe**
 
 Variable을 subscribe 하기 위해서는
@@ -54,9 +56,9 @@ variable.asObservable().subscribe(onNext: { text in
 	print("onDisposed")
 }).disposed(by: disposeBag)
 
-variable.value = "observable"
 {% endhighlight %}
 
+<br>
 **Variable의 값 변경**
 
 Variable의 값을 변경하는 방법은 두가지가 있다.
@@ -64,13 +66,13 @@ Variable의 값을 변경하는 방법은 두가지가 있다.
 \#1. variable.value에 값을 대입한다.
 
 {% highlight swift %}
-variable.value = "observable"
+variable.value = "second"
 {% endhighlight %}
 
 \#2. observable.bind(to: Variable<Generic Type>)에 파라미터로 전달한다.
 
 {% highlight swift %}
-Observable<String>.just("value").bind(to: variable).disposed(by: disposeBag)
+Observable<String>.just("third").bind(to: variable).disposed(by: disposeBag)
 {% endhighlight %}
 
 \#1.의 방법은 일반 변수를 사용하듯 Variable의 값 variable.value에 새로운 값을 대입하는 방법이고
@@ -87,6 +89,7 @@ observable.subscribe(onNext: { text in
 },...
 {% endhighlight %}
 
+<br>
 **Variable 이벤트**
 
 Variable을 생성하면서 설정한 초기 값으로 subscribe이 된 후 바로 이벤트가 발생하고,
@@ -95,7 +98,7 @@ Variable을 생성하면서 설정한 초기 값으로 subscribe이 된 후 바�
 
 {% highlight swift %}
 // Variable 생성
-let variable: Variable<String> = Variable<String>("variable")
+let variable: Variable<String> = Variable<String>("first")
 
 // Variable 구독
 variable.asObservable().subscribe(onNext: { text in
@@ -106,20 +109,55 @@ variable.asObservable().subscribe(onNext: { text in
 	print("onDisposed")
 }).disposed(by: disposeBag)
         
-variable.value = "observable"
+variable.value = "second"
 
-/// 실행 결과
+/*
+실행 결과
 
-/// Variable 생성시 설정한 초기 값 "variable"
-/// "bind onNext: variable"
+1. Variable 생성시 설정한 초기 값 "first"
+"bind onNext: first"
 
-/// subscribe 설정 후 변경한 값 "observable"
-/// "bind onNext: observable"
+2. subscribe 설정 후 변경한 값 "second"
+"bind onNext: second"
 
-/// 지역 변수 variable이 deinit 되는 순간 발생한 onCompleted의 print("onCompleted")
-/// "onCompleted"
+3. 지역 변수 variable이 deinit 되는 순간 발생한 onCompleted의 print("onCompleted")
+"onCompleted"
 
-/// 지역 변수 variable이 deinit 되는 순간 발생한 onDisposed의 print("onDisposed")
-/// "onDisposed"
+4. 지역 변수 variable이 deinit 되는 순간 발생한 onDisposed의 print("onDisposed")
+"onDisposed"
+*/
+{% endhighlight %}
+
+<br>
+특이 사항으로 Variable이 subscribe 되기 전 값을 변경하는 경우 subscribe 설정시
+
+초기 값이 아닌 subscribe 설정하기 전 가장 마지막 값으로 최초 이벤트가 발생한다.
+
+{% highlight swift %}
+// Variable 생성
+let variable: Variable<String> = Variable<String>("first")
+variable.value = "second"
+
+// Variable 구독
+variable.asObservable().subscribe(onNext: { text in
+print("bind onNext: \(text)")
+}, onError: nil, onCompleted: {
+	print("onCompleted")
+}, onDisposed: {
+	print("onDisposed")
+}).disposed(by: disposeBag)
+
+variable.value = "third"
+
+
+/*
+실행 결과
+
+1. Variable 생성 후 변경한 값 "second"
+"bind onNext: second"
+
+2. subscribe 설정 후 변경한 값 "third"
+"bind onNext: third"
+...
 */
 {% endhighlight %}
