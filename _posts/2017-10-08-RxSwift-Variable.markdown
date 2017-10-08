@@ -86,3 +86,31 @@ observable.subscribe(onNext: { text in
 	variable.value = text
 },...
 {% endhighlight %}
+
+**Variable 이벤트**
+
+Variable을 생성하면서 설정한 초기 값으로 subscribe이 된 후 바로 이벤트가 발생하고,
+
+이후 value가 변경될때마다 이벤트가 발생하게 된다.
+
+{% highlight swift %}
+// Variable 생성
+let variable: Variable<String> = Variable<String>("variable")
+
+// Variable 구독
+variable.asObservable().subscribe(onNext: { text in
+	print("bind onNext: \(text)")
+}, onError: nil, onCompleted: {
+	print("onCompleted")
+}, onDisposed: {
+	print("onDisposed")
+}).disposed(by: disposeBag)
+        
+variable.value = "observable"
+{% endhighlight %}
+	
+	// 실행 결과
+	"bind onNext: variable"			// Variable 생성시 설정한 초기 값 "variable"
+	"bind onNext: observable"		// subscribe 설정 후 변경한 값 "observable"
+	"onCompleted"					// 지역 변수 variable이 deinit 되는 순간 발생한 onCompleted의 print("onCompleted")
+	"onDisposed"					// 지역 변수 variable이 deinit 되는 순간 발생한 onDisposed의 print("onDisposed")
