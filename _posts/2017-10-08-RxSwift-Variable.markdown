@@ -107,10 +107,19 @@ variable.asObservable().subscribe(onNext: { text in
 }).disposed(by: disposeBag)
         
 variable.value = "observable"
+
+/// 실행 결과
+
+/// Variable 생성시 설정한 초기 값 "variable"
+/// "bind onNext: variable"
+
+/// subscribe 설정 후 변경한 값 "observable"
+/// "bind onNext: observable"
+
+/// 지역 변수 variable이 deinit 되는 순간 발생한 onCompleted의 print("onCompleted")
+/// "onCompleted"
+
+/// 지역 변수 variable이 deinit 되는 순간 발생한 onDisposed의 print("onDisposed")
+/// "onDisposed"
+*/
 {% endhighlight %}
-	
-	// 실행 결과
-	"bind onNext: variable"			// Variable 생성시 설정한 초기 값 "variable"
-	"bind onNext: observable"		// subscribe 설정 후 변경한 값 "observable"
-	"onCompleted"					// 지역 변수 variable이 deinit 되는 순간 발생한 onCompleted의 print("onCompleted")
-	"onDisposed"					// 지역 변수 variable이 deinit 되는 순간 발생한 onDisposed의 print("onDisposed")
