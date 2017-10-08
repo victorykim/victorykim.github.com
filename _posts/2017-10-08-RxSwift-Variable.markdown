@@ -49,11 +49,11 @@ bind(onNext: (Generic Type) -> Void)로 이벤트에 대한 closure만 구현한
 {% highlight swift %}
 // Variable subscribe
 variable.asObservable().subscribe(onNext: { text in
-  print("bind onNext: \(text)")
+    print("bind onNext: \(text)")
 }, onError: nil, onCompleted: {
-  print("onCompleted")
+    print("onCompleted")
 }, onDisposed: {
-  print("onDisposed")
+    print("onDisposed")
 }).disposed(by: disposeBag)
 
 {% endhighlight %}
@@ -102,13 +102,13 @@ let variable: Variable<String> = Variable<String>("first")
 
 // Variable 구독
 variable.asObservable().subscribe(onNext: { text in
-  print("bind onNext: \(text)")
+    print("bind onNext: \(text)")
 }, onError: nil, onCompleted: {
-  print("onCompleted")
+    print("onCompleted")
 }, onDisposed: {
-  print("onDisposed")
+    print("onDisposed")
 }).disposed(by: disposeBag)
-        
+  
 variable.value = "second"
 
 /*
@@ -140,11 +140,11 @@ variable.value = "second"
 
 // Variable 구독
 variable.asObservable().subscribe(onNext: { text in
-  print("bind onNext: \(text)")
+    print("bind onNext: \(text)")
 }, onError: nil, onCompleted: {
-  print("onCompleted")
+    print("onCompleted")
 }, onDisposed: {
-  print("onDisposed")
+    print("onDisposed")
 }).disposed(by: disposeBag)
 
 variable.value = "third"
