@@ -5,7 +5,7 @@ date:   2017-10-06 16:47:20 +0900
 categories: RxSwift
 ---
 
-####Observable 생성
+**Observable 생성**
 
 {% highlight swift %}
 
@@ -18,7 +18,7 @@ let observable: Observable<String> = Observable<String>.create({ observer in
 })
 {% endhighlight %}
 
-#####\#1. String 타입 Observable 생성
+**\#1. String 타입 Observable 생성**
 
 {% highlight swift %}
 Observable<String>.create(subscribe: (AnyObserver<String>) -> Disposable)
@@ -26,25 +26,29 @@ Observable<String>.create(subscribe: (AnyObserver<String>) -> Disposable)
 #=>subscribe: observer를 parameter로 받고 Disposable을 리턴하는 closure parameter
 {% endhighlight %}
 
-#####\#2. 이벤트 전송
+**\#2. 이벤트 전송**
+
 {% highlight swift %}
 observer.onNext("Next")
 #=>"Next" 라는 문자열 이벤트를 전송
 {% endhighlight %}
 
-#####\#3. 에러 전송
+**\#3. 에러 전송**
+
 {% highlight swift %}
 observer.onError(error)
 #=>Error 전송
 {% endhighlight %}
 
-#####\#4. observable completed 전송
+**\#4. observable completed 전송**
+
 {% highlight swift %}
 observer.onCompleted()
 #=>Completed 전송
 {% endhighlight %}
 
-#####\#5. Disposable
+**\#5. Disposable**
+
 {% highlight swift %}
 return Disposables.create()
 #=>Disposable 리턴
@@ -62,7 +66,7 @@ Observable의 기본 Cycle을 요약하면
 
 -
 
-####Subscribe
+**Subscribe**
 
 {% highlight swift %}
 // #1. Observable subscribe 설정
@@ -81,7 +85,7 @@ observable.subscribe(onNext: { text in
 }).disposed(by: disposeBag)	// #6. subscribe 해제를 위해 disposeBag에 등록
 {% endhighlight %}
 
-#####\#1. Observable subscribe 설정
+**\#1. Observable subscribe 설정**
 
 {% highlight swift %}
 observable.subscribe(onNext: ((String) -> Void)?, onError: ((Error) -> Void)?, onCompleted: (() -> Void)?, onDisposed: (() -> Void)?)
@@ -91,7 +95,7 @@ observable.subscribe(onNext: ((String) -> Void)?, onError: ((Error) -> Void)?, o
 #=>onDisposed: disposed 발생시 실행할 Void Type Optional Closure paramter
 {% endhighlight %}
 
-#####\#2. Generic Type 이벤트 발생시 동작하는 Closure
+**\#2. Generic Type 이벤트 발생시 동작하는 Closure**
 
 Optional Type closure로 구현을 안하고 nil을 넘겨주는것이 가능
 
@@ -104,7 +108,7 @@ print("onNext: \(text)")
 {% endhighlight %}
 전달 받은 문자열을 print 하도록 구현
 
-#####\#3. 에러 발생시 동작하는 Closure
+**\#3. 에러 발생시 동작하는 Closure**
 
 Optional Type closure로 구현을 안하고 nil을 넘겨주는것이 가능
 
@@ -117,7 +121,7 @@ print("onError: \(error.localizedDescription)")
 {% endhighlight %}
 전달 받은 에러의 localizedDescription을 print 하도록 구현
 
-#####\#4. Completed 발생시 동작하는 Closure
+**\#4. Completed 발생시 동작하는 Closure**
 
 Optional Type closure로 구현을 안하고 nil을 넘겨주는것이 가능
 
@@ -130,7 +134,7 @@ print("onCompleted")
 {% endhighlight %}
 문자열 "onCompleted" print 하도록 구현
 
-#####\#5. Disposed 발생시 동작하는 Closure
+**\#5. Disposed 발생시 동작하는 Closure**
 
 Optional Type closure로 구현을 안하고 nil을 넘겨주는것이 가능
 
@@ -143,7 +147,7 @@ print("disposed")
 {% endhighlight %}
 문자열 "disposed" print 하도록 구현
 
-#####\#6. subscribe 해제를 위해 disposeBag에 등록
+**\#6. subscribe 해제를 위해 disposeBag에 등록**
 
 Observable 이벤트 종료되는 경우 subscribe을 해제하고 메모리 해제를 위해 DisposeBag 객체에
 Observable을 등록하는 부분
@@ -166,7 +170,7 @@ observable.bind(onNext: (String) -> Void)
 
 -
 
-####Disposed
+**Disposed**
 
 Observable의 subscribe 해제 시점은 disposed(by: DisposeBag) 호출시
 
