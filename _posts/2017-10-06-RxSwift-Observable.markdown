@@ -102,11 +102,13 @@ Optional Type closure로 구현을 안하고 nil을 넘겨주는것이 가능
 Observable 생성시 구현한 onNext 이벤트 발생시 호출되는 closure
 
 이벤트가 발생하는 경우 원하는 동작을 구현, 예시 코드의 경우
+
+전달 받은 문자열을 print 하도록 구현
+
 {% highlight swift %}
 print("onNext: \(text)")
 #=> "onNext: Next" 출력
 {% endhighlight %}
-전달 받은 문자열을 print 하도록 구현
 
 **\#3. 에러 발생시 동작하는 Closure**
 
@@ -115,11 +117,13 @@ Optional Type closure로 구현을 안하고 nil을 넘겨주는것이 가능
 Observable 생성시 구현한 onError 이벤트 발생시 호출되는 closure
 
 이벤트가 발생하는 경우 원하는 동작을 구현, 예시 코드의 경우
+
+전달 받은 에러의 localizedDescription을 print 하도록 구현
+
 {% highlight swift %}
 print("onError: \(error.localizedDescription)")
 #=> "onError: (에러 도메인, 에러 코드 등)" 출력
 {% endhighlight %}
-전달 받은 에러의 localizedDescription을 print 하도록 구현
 
 **\#4. Completed 발생시 동작하는 Closure**
 
@@ -128,11 +132,13 @@ Optional Type closure로 구현을 안하고 nil을 넘겨주는것이 가능
 Observable 생성시 구현한 onCompleted 이벤트 발생시 호출되는 closure
 
 이벤트가 발생하는 경우 원하는 동작을 구현, 예시 코드의 경우
+
+문자열 "onCompleted" print 하도록 구현
+
 {% highlight swift %}
 print("onCompleted")
 #=> "onCompleted" 출력
 {% endhighlight %}
-문자열 "onCompleted" print 하도록 구현
 
 **\#5. Disposed 발생시 동작하는 Closure**
 
@@ -141,11 +147,13 @@ Optional Type closure로 구현을 안하고 nil을 넘겨주는것이 가능
 Observable의 subscribe이 disposed 되는 경우 호출되는 closure
 
 이벤트가 발생하는 경우 원하는 동작을 구현, 예시 코드의 경우
+
+문자열 "disposed" print 하도록 구현
+
 {% highlight swift %}
 print("disposed")
 #=> "disposed" 출력
 {% endhighlight %}
-문자열 "disposed" print 하도록 구현
 
 **\#6. subscribe 해제를 위해 disposeBag에 등록**
 
