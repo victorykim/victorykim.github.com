@@ -11,10 +11,10 @@ categories: RxSwift
 
 // #1. Generic observable 생성
 let observable: Observable<String> = Observable<String>.create({ observer in
-	observer.onNext("Next")             // #2. 이벤트 전송
-	observer.onError(error)             // #3. 에러 전송
-	observer.onCompleted()              // #4. observable completed 전송
-	return Disposables.create()         // #5. disposable 리턴
+  observer.onNext("Next")             // #2. 이벤트 전송
+  observer.onError(error)             // #3. 에러 전송
+  observer.onCompleted()              // #4. observable completed 전송
+  return Disposables.create()         // #5. disposable 리턴
 })
 {% endhighlight %}
 
@@ -71,17 +71,17 @@ Observable의 기본 Cycle을 요약하면
 {% highlight swift %}
 // #1. Observable subscribe 설정
 observable.subscribe(onNext: { text in
-	// #2. 이벤트 발생시 동작 구현
-	print("onNext: \(text)")
+// #2. 이벤트 발생시 동작 구현
+  print("onNext: \(text)")
 }, onError: { error in
-	// #3. 에러 발생시 동작 구현
-	print("onError: \(error.localizedDescription)")
+// #3. 에러 발생시 동작 구현
+  print("onError: \(error.localizedDescription)")
 }, onCompleted: {
-	// #4. Completed 발생시 동작 구현
-	print("onCompleted")
+// #4. Completed 발생시 동작 구현
+  print("onCompleted")
 }, onDisposed: {
-	// #5. Disposed 발생시 동작 구현
-	print("disposed")
+// #5. Disposed 발생시 동작 구현
+  print("disposed")
 }).disposed(by: disposeBag)	// #6. subscribe 해제를 위해 disposeBag에 등록
 {% endhighlight %}
 
