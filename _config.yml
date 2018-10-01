@@ -79,7 +79,7 @@ social:
     username: VictoryKim
     url: https://www.facebook.com/vvic90vk
     desc: Friend me on Facebook
-    share: true
+    share: false
 
   - name: GitHub
     icon: github
