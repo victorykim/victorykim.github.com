@@ -16,7 +16,7 @@ name: Victory Kim
 description: >
   A simple yet classy theme for your Jekyll website or blog.
 baseurl: ""
-url: "http://victorykim.github.io"
+url: ""
 cover: "/assets/header_image.jpg"
 logo: "/assets/logo.png"
 
