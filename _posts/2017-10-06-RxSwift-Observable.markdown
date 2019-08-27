@@ -3,6 +3,7 @@ layout: post
 title:  "RxSwift - Observable"
 date:   2017-10-06 16:47:20 +0900
 categories: RxSwift
+background: '/img/posts/02.jpg'
 ---
 
 **Observable 생성**

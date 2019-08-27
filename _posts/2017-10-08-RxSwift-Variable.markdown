@@ -3,6 +3,7 @@ layout: post
 title:  "RxSwift - Variable"
 date:   2017-10-08 13:51:20 +0900
 categories: RxSwift
+background: '/img/posts/03.jpg'
 ---
 
 **Variable**
@@ -17,7 +18,6 @@ Variable은 이벤트는 발생하지만 Error와 Completed를 발생시키지�
 
 deinit되는 순간 자동으로 Completed 이벤트를 발생한다.
 
--
 
 <br>
 **Variable 생성**
