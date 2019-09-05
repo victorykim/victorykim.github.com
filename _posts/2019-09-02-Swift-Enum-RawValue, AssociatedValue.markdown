@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Enum - RawValue, AssociatedValue"
-date:   2019-09-01 14:42:20 +0900
+date:   2019-09-02 14:42:20 +0900
 categories: Swift
 background: '/img/posts/03.jpg'
 ---
