@@ -17,23 +17,23 @@ Nice 본인인증만으로 동작하기 때문에 한국 통신사를 사용하�
 
 해당 문제를 해결하기 위해 처음에 수정한 방식은
 
-{% highlight swift %}
+```swift
 if Locale.current.regionCode != "KR" && Date() < "2019-08-13".date(format: "yyyy-MM-dd")! {
     // 리뷰어용 로그인 화면 호출
 } else {
     // 일반 사용자용 로그인 화면(Nice 본인인증 웹뷰) 호출
 }
-{% endhighlight %}
+```
 
 이런 방식으로 Locale.current.region 값이 "KR"이 아니고  
 오늘 날짜가 특정 날짜 이전인 경우에 Native로 만든 리뷰어용 로그인 화면을 띄우고  
 
-{% highlight swift %}
+```swift
 guard kId == "ReviewerId" && kPw == "ReviewerPassword" else {
     // 로그인 실패 처리
     return
 }
-{% endhighlight %}
+```
 
 리뷰어용 로그인 화면에서는 입력된 ID, Password를 로컬에서 비교,  
 리뷰어용 정보인 경우 테스트 유저 정보의 key 값으로 로그인 시도 하도록 구현 했으나  
@@ -73,34 +73,34 @@ Remote Config 사용 방법은
 
 **1. RemoteConfig의 configSettings를 설정한다.**
 
-{% highlight swift %}
+```swift
 let kConfigSettings = RemoteConfigSettings()
 kConfigSettings.minimumFetchInterval = 0
 RemoteConfig.remoteConfig().configSettings
-{% endhighlight %}
+```
 
 **2. RemoteConfig에서 정보를 받아오기 전 갱신해준다.**
 
-{% highlight swift %}
+```swift
 RemoteConfig.remoteConfig().fetch(completionHandler: { status, error in
     // Stauts가 Success인 경우 다음 Flow 진행
 })
-{% endhighlight %}
+```
 
 **3. Fetch에 성공한 경우 받아온 값을 활성화한다.**
 
-{% highlight swift %}
+```swift
 RemoteConfig.remoteConfig().activate(completionHandler: { error in
     // error가 발생하지 않은 경우 다음 Flow로 진행            
 })
-{% endhighlight %}
+```
 
 **4. Firebase RemoteConfig에 설정된 값을 받아와서 사용한다.**
 
-{% highlight swift %}
+```swift
 let kRemoteVersion = RemoteConfig.remoteConfig().configValue(forKey: "Version").stringValue
 }
-{% endhighlight %}
+```
 
 즉, 상기된 문제의 해결 법으로 Firebase 서버에 앱스토어에 출시된 버전과  
 심사 받으려는 버전을 비교 할 수 있는 정보와 리뷰어가 사용 할 테스트 계정의  

@@ -24,10 +24,10 @@ deinit되는 순간 자동으로 Completed 이벤트를 발생한다.
 
 Generic Type으로 일반 변수 생성과 동일한 방식으로 생성하며 반드시 초기 값을 지정해야한다.
 
-{% highlight swift %}
+```swift
 // Variable 생성
 let variable: Variable<String> = Variable<String>("first")
-{% endhighlight %}
+```
 
 <br>
 **Variable subscribe**
@@ -46,7 +46,7 @@ bind(onNext: (Generic Type) -> Void)로 이벤트에 대한 closure만 구현한
 
 아래 예시 코드의 경우 Completed가 호출되는 순간을 확인하기 위해 subscribe으로 구현
 
-{% highlight swift %}
+```swift
 // Variable subscribe
 variable.asObservable().subscribe(onNext: { text in
     print("bind onNext: \(text)")
@@ -56,7 +56,7 @@ variable.asObservable().subscribe(onNext: { text in
     print("onDisposed")
 }).disposed(by: disposeBag)
 
-{% endhighlight %}
+```
 
 <br>
 **Variable의 값 변경**
@@ -65,15 +65,15 @@ Variable의 값을 변경하는 방법은 두가지가 있다.
 
 \#1. variable.value에 값을 대입한다.
 
-{% highlight swift %}
+```swift
 variable.value = "second"
-{% endhighlight %}
+```
 
 \#2. observable.bind(to: Variable<Generic Type>)에 파라미터로 전달한다.
 
-{% highlight swift %}
+```swift
 Observable<String>.just("third").bind(to: variable).disposed(by: disposeBag)
-{% endhighlight %}
+```
 
 \#1.의 방법은 일반 변수를 사용하듯 Variable의 값 variable.value에 새로운 값을 대입하는 방법이고
 
@@ -83,11 +83,11 @@ Observable의 이벤트가 발생하는 경우 해당 이벤트의 값을 Variab
 
 아래 예시 코드와 같이 observable.subscribe의 onNext closure에서 전달 받은 값을 Variable의 value에 대입 시키는것과 같다.
 
-{% highlight swift %}
+```swift
 observable.subscribe(onNext: { text in
 	variable.value = text
 },...
-{% endhighlight %}
+```
 
 <br>
 **Variable 이벤트**
@@ -96,7 +96,7 @@ Variable을 생성하면서 설정한 초기 값으로 subscribe이 된 후 바�
 
 이후 value가 변경될때마다 이벤트가 발생하게 된다.
 
-{% highlight swift %}
+```swift
 // Variable 생성
 let variable: Variable<String> = Variable<String>("first")
 
@@ -126,14 +126,14 @@ variable.value = "second"
 4. 지역 변수 variable이 deinit 되는 순간 발생한 onDisposed의 print("onDisposed")
 "onDisposed"
 */
-{% endhighlight %}
+```
 
 <br>
 특이 사항으로 Variable이 subscribe 되기 전 값을 변경하는 경우 subscribe 설정시
 
 초기 값이 아닌 subscribe 설정하기 전 가장 마지막 값으로 최초 이벤트가 발생한다.
 
-{% highlight swift %}
+```swift
 // Variable 생성
 let variable: Variable<String> = Variable<String>("first")
 variable.value = "second"
@@ -160,4 +160,4 @@ variable.value = "third"
 "bind onNext: third"
 ...
 */
-{% endhighlight %}
+```

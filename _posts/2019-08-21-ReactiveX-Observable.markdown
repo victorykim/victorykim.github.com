@@ -53,11 +53,11 @@ ReactiveX는 기본적으로 비동기와 병렬로 메소드를 호출하지만
 
 혹은, 이렇게 표현하기도 한다:
 
-{% highlight swift %}
+```swift
 // 메서드를 호출하고, 리턴 값을 'returnVal'에 할당한다.
 returnVal = someMethod(itsParameters);
 // returnVal을 통해 필요한 작업을 진행한다.
-{% endhighlight %}
+```
 
 하지만, 비동기 모델에서는 아래와 같은 흐름대로 코드가 실행된다.
 
@@ -68,7 +68,7 @@ returnVal = someMethod(itsParameters);
 
 이를 코드로 구현하면 아래와 같다:
 
-{% highlight swift %}
+```swift
 // 옵저버의 onNext 핸들러를 정의한다, 하지만 실행하지는 않는다
 // (이 예제에서는, 단순히 옵저버에 onNext 핸들러만 구현한다)
 def myOnNext = { it -> /* 필요한 연산을 처리한다. */ };
@@ -77,7 +77,7 @@ def myObservable = somObservable(itsParameters);
 // 옵저버가 Observable을 구독한다. 그리고 Observable을 실행한다.
 myObservable.subscribe(myOnNext);
 // 필요한 코드를 구현한다.
-{% endhighlight %}
+```
 
 ### onNext, onCompleted, 그리고 onError
 
@@ -94,12 +94,12 @@ myObservable.subscribe(myOnNext);
 Observable 계약에 명시된 조건에 따라, `onNext`는 0번 이상 호출 될 수 있으며 그 후에는 `onCompleted` 또는 `onError` 둘 중 하나를 마지막으로 호출한다. 단, 이 둘 모두를 호출하지는 않는다. 이 문서에서는 관례에 따라, `onNext` 호출을 항목의 "배출"로 부르며, `onCompleted` 혹은 `onError` 호출을 "알림"으로 부를 것이다.
 
 이해를 돕기 위해서 `subscribe` 호출 예제를 작성해 보았다:  
-{% highlight swift %}
+```swift
 def myOnNext = { item -> /* 필요한 연산을 처리한다. */ }
 def myOnError = { throwable -> /* 실패한 호출에 대응한다. */ }
 def myObservable = someMethod(itsParameters);
 myObservable.subscribe(myOnNext, myError, myCompltete)
-{% endhighlight %}
+```
 
 #### 참고
 * [Introduction to Rx: IObserver](http://www.introtorx.com/Content/v1.0.10621.0/02_KeyTypes.html#IObserver)

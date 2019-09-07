@@ -6,7 +6,7 @@ categories: Swift
 background: '/img/posts/03.jpg'
 ---
 
-# Enum - RawValue, AssociatedValue
+<!-- # Enum - RawValue, AssociatedValue -->
 
 ### Enum의 값(RawValue)
 
@@ -14,7 +14,7 @@ background: '/img/posts/03.jpg'
 `C언어`에서는 `enum`에 정수만 지정할 수 있었지만  
 `Swift`의 경우에는 훨씬 유연하게 타입 지정이 가능하다.  
 
-~~~Swift
+```swift
 enum Direction: Int {
     case left = 0
     case right = 1
@@ -41,13 +41,13 @@ enum Constants: Double {
 
 print(Constants.e.rawValue)
 // 2.71828
-~~~
+```
 
 `enum Direction: Int`, `enum ViewType: String` 과 같이 `enum` 선언,  `Direction` 네이밍 다음에 `: Type` 으로 원하는 타입을 지정 할 수 있습니다.  
 
 `String` 이나 `Int`의 경우 `value` 표기를 지정하지 않아도 컴파일러가 알아서 채워 준다.  
 
-~~~Swift
+```swift
 // Mercury = 1, Venus = 2, ... Neptune = 8
 enum Planet: Int {
     case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
@@ -63,7 +63,7 @@ enum CompassPoint: String {
 
 print(CompassPoint.east.rawValue)
 // east
-~~~
+```
 
 * 실수형(`Float`, `Double`)의 경우 `Int` 처럼(`1.0...8.0`) 자동으로 채워준다.  
 
@@ -78,7 +78,7 @@ Swift에서는 정수(Integer), 실수(Floating point), 문자열(String), 불�
 임의의 수의 문자를 포함하는 문자열 리터럴의 경우 `ExpressibleByStringLiteral`,  
 단일 문자 만 포함하는 문자열 리터럴의 경우 `ExpressibleByUnicodeScalarLiteral` 또는 `ExpressibleByExtendedGraphemeClusterLiteral`  
 
-~~~Swift
+```swift
 class SomeType: Equatable & ExpressibleByIntegerLiteral {
     let value: Int
     
@@ -99,23 +99,23 @@ enum SomeSome: SomeType {
 
 print(SomeSome.a.rawValue.value)
 // 1
-~~~
+```
 
 타입 지정이 된 `enum`의 연결된 값을 사용하려면 `rawValue` 프로퍼티를 통해 사용하면 된다.
 
-~~~Swift
+```swift
 print(Planet.uranus.rawValue)
 // 7
 
 print(SomeSome.a.rawValue.value)
 // 1
-~~~
+```
 
 `rawValue` 란 `enum` `case` 각각의 고유 값이라고 할 수 있다.  
 즉, 프로퍼티를 통해 값을 읽어오는것 뿐만 아니라 반대로 rawValue를 통해  
 `enum` `case`를 생성 하는 것도 가능하다.  
 
-~~~Swift
+```swift
 enum Direction: Int {
     case left = 0
     case right = 1
@@ -127,14 +127,14 @@ enum Direction: Int {
 let kDirection = Direction(rawValue: 1)
 print(kDirection?.rawValue)
 // Optional(1)
-~~~
+```
 
 타입 지정된 `enum`의 경우 기본적으로 `rawValue` 생성자 호출이 가능하며  
 각 `case`에 연결이 안 된 예외적인 `rawValue`를 `parameter`로 받을 수 있기 때문에  
 기본적으로 `init?(rawValue)` 옵셔널 생성자 함수 이다.  
 단, 직접 생성자 함수를 구현하여 예외 케이스에 대한 처리를 해줄수도 있다.  
 
-~~~Swift
+```swift
 enum Direction: Int {
     case left = 0
     case right = 1
@@ -163,7 +163,7 @@ enum Direction: Int {
 let kDirection = Direction(rawValue: 1)
 print(kDirection.rawValue)
 // 1
-~~~  
+```  
 <br>
 
 ### Enum의 Associated Value
@@ -176,7 +176,7 @@ Alert을 표시할때 기본적인 표시 패턴으로 `title`, `message`와 `Ok
 커스터마이징 된 Alert으로 기본 UIAlert과 다른 구조로 표시해야하는 경우도 있을 수 있다.
 이런 경우 `enum`의 `Associated Value`를 사용 할 수 있는데  
 
-~~~Swift
+```swift
 enum AlertType {
     case normal(title: String?, message: String?, ok: String?, cancel: String?)
     case banner(image: UIImage)
@@ -195,7 +195,7 @@ class AlertViewController {
         }
     }
 }
-~~~
+```
 
 상기된 코드처럼 `AlertType`이라는 `enum` 을 구현하고,  
 `case` 로 기본적인 `Alert` 구현이 가능한 `normal` 타입과,  
@@ -207,7 +207,7 @@ class AlertViewController {
 이후 `viewDidLoad` 호출 시점에 전달 받은 `AlertType` 을 기준으로 UI를 구성한다.  
 
 `Assoicated Value` 가 적용된 `enum case` 의 패턴 매칭 방법은 아래와 같다.  
-~~~Swift
+```swift
 enum Type {
     case a(title: String)
     case b(value: Int)
@@ -230,7 +230,7 @@ if case let Type.a(title) = kValueA {
     print(title)
 }
 // title
-~~~
+```
 
 즉 `enum`의 `rawValue`는 타입 지정을 통해 `case` 별 값을 미리 지정해두는 방법 이고,  
 `Associated Value`는 `case` 생성 시점에 값을 지정해주는 방법 이다.  
@@ -240,7 +240,7 @@ if case let Type.a(title) = kValueA {
 
 단, `rawValue`의 생성자 함수 구현 처럼 직접 `rawValue` 값을 구현하여 사용 할 수도 있다.
 
-~~~Swift
+```swift
 enum Type {
     case a(title: String)
     case b(value: Int)
@@ -259,7 +259,7 @@ enum Type {
 
 print(Type.a(title: "Title").rawValue)
 // 0
-~~~
+```
 
 하지만 `rawValue` 자체를 지정해줬을 뿐 `Equatable Protocol` 을 구현한것은 아니기 때문에  
 `==` 직접 비교는 불가능 하다. 

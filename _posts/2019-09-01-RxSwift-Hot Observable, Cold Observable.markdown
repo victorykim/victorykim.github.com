@@ -6,7 +6,7 @@ categories: RxSwift
 background: '/img/posts/02.jpg'
 ---
 
-# Hot Observable, Cold Observable
+<!-- # Hot Observable, Cold Observable -->
 
 Observable은 이벤트 방출(emit) 시점에 따라
 Hot Observable과 Cold Observable 로 구분 할 수 있다.
@@ -16,7 +16,7 @@ Hot Observable과 Cold Observable 로 구분 할 수 있다.
 * Subscribe 시점과 상관 없이 Observer에게 이벤트를 중간부터 전송한다.
 
 예시)
-~~~Swift
+```swift
 let kHotObservable = BehaviorRelay<Int>(value: 1)
 kHotObservable.accept(2)
 
@@ -43,7 +43,7 @@ next(2)
 next(3)
 22222: next(3)
 */
-~~~
+```
 
 Subscribe 시점과 상관 없이 중간부터 이벤트를 방출 한다.  
 
@@ -57,7 +57,7 @@ accept된 값 2, 3에 대한 이벤트가 호출 되는 것을 확인 할 수 �
 ## Cold Observable
 * Subscribe 되는 시점부터 이벤트를 생성해 방출한다.
 
-~~~Swift
+```swift
 let kColdObservable = Observable<Int>.create({ observer in
     observer.onNext(1)
     observer.onNext(2)
@@ -96,7 +96,7 @@ onDisposed
 222: onCompleted
 222: onDisposed
 */
-~~~
+```
 
 Cold Observable은 이벤트를 방출하기전에 Observer가 Subscribe 할 때 까지 기다린다.  
 따라서 Observer는 시작부터 이벤트 전체를 호출하는 것을 확인 할 수 있다.  
