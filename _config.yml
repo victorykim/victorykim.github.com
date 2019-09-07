@@ -1,25 +1,25 @@
-# External gems
-# See http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html for making `jekyll archives` work.
-plugins:
-  - jekyll-archives # Sorry, not GitHub pages friendly!
-  - jekyll-sitemap
-  - jekyll-paginate
-
 # Site settings
+
 title: 개발 참고서
+tagline: 'tag line'
 email: vvic90vk@gmail.com
 name: Victory Kim
 description: >
   참고가 안되는 참고서
 baseurl: ""
-url: ""
+url: "https://victoryKim.github.io"
 
 # Build settings
-markdown: kramdown
-paginate: 5
-paginate_path: "/page:num/"
-inter_post_navigation: false
-highlightjs_theme: "atom-one-dark"
+markdown:         kramdown
+highlighter:      rouge
 
-# Disqus comments
-disqus_shortname: gitHub-jekyll
+paginate: 5
+# paginate_path: "/page:num/"
+# inter_post_navigation: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-gist
+  - jekyll-paginate
+
+sidebar_home_link:  true

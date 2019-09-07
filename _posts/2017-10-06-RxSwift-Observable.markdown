@@ -8,7 +8,7 @@ background: '/img/posts/02.jpg'
 
 **Observable 생성**
 
-{% highlight swift %}
+```swift
 
 // #1. Generic observable 생성
 let observable: Observable<String> = Observable<String>.create({ observer in
@@ -17,43 +17,43 @@ let observable: Observable<String> = Observable<String>.create({ observer in
     observer.onCompleted()              // #4. observable completed 전송
     return Disposables.create()         // #5. disposable 리턴
 })
-{% endhighlight %}
+```
 
 **\#1. String 타입 Observable 생성**
 
-{% highlight swift %}
+```swift
 Observable<String>.create(subscribe: (AnyObserver<String>) -> Disposable)
 
 #=>subscribe: observer를 parameter로 받고 Disposable을 리턴하는 closure parameter
-{% endhighlight %}
+```
 
 **\#2. 이벤트 전송**
 
-{% highlight swift %}
+```swift
 observer.onNext("Next")
 #=>"Next" 라는 문자열 이벤트를 전송
-{% endhighlight %}
+```
 
 **\#3. 에러 전송**
 
-{% highlight swift %}
+```swift
 observer.onError(error)
 #=>Error 전송
-{% endhighlight %}
+```
 
 **\#4. observable completed 전송**
 
-{% highlight swift %}
+```swift
 observer.onCompleted()
 #=>Completed 전송
-{% endhighlight %}
+```
 
 **\#5. Disposable**
 
-{% highlight swift %}
+```swift
 return Disposables.create()
 #=>Disposable 리턴
-{% endhighlight %}
+```
 
 
 Observable의 기본 Cycle을 요약하면
@@ -69,7 +69,7 @@ Observable의 기본 Cycle을 요약하면
 
 **Subscribe**
 
-{% highlight swift %}
+```swift
 // #1. Observable subscribe 설정
 observable.subscribe(onNext: { text in
 // #2. 이벤트 발생시 동작 구현
@@ -84,17 +84,17 @@ observable.subscribe(onNext: { text in
 // #5. Disposed 발생시 동작 구현
     print("disposed")
 }).disposed(by: disposeBag)	// #6. subscribe 해제를 위해 disposeBag에 등록
-{% endhighlight %}
+```
 
 **\#1. Observable subscribe 설정**
 
-{% highlight swift %}
+```swift
 observable.subscribe(onNext: ((String) -> Void)?, onError: ((Error) -> Void)?, onCompleted: (() -> Void)?, onDisposed: (() -> Void)?)
 #=>onNext: 이벤트 발생하는 경우 실행할 Observable 생성시 설정한 Generic Type을 parameter로 받는 Optional Closure parameter
 #=>onError: 에러 발생시 실행할 Error를 parameter로 받는 Optional Closure parameter
 #=>onCompleted: complted 발생시 실행할 Void Type Optional Closure paramter
 #=>onDisposed: disposed 발생시 실행할 Void Type Optional Closure paramter
-{% endhighlight %}
+```
 
 **\#2. Generic Type 이벤트 발생시 동작하는 Closure**
 
@@ -106,10 +106,10 @@ Observable 생성시 구현한 onNext 이벤트 발생시 호출되는 closure
 
 전달 받은 문자열을 print 하도록 구현
 
-{% highlight swift %}
+```swift
 print("onNext: \(text)")
 #=> "onNext: Next" 출력
-{% endhighlight %}
+```
 
 **\#3. 에러 발생시 동작하는 Closure**
 
@@ -121,10 +121,10 @@ Observable 생성시 구현한 onError 이벤트 발생시 호출되는 closure
 
 전달 받은 에러의 localizedDescription을 print 하도록 구현
 
-{% highlight swift %}
+```swift
 print("onError: \(error.localizedDescription)")
 #=> "onError: (에러 도메인, 에러 코드 등)" 출력
-{% endhighlight %}
+```
 
 **\#4. Completed 발생시 동작하는 Closure**
 
@@ -136,10 +136,10 @@ Observable 생성시 구현한 onCompleted 이벤트 발생시 호출되는 clos
 
 문자열 "onCompleted" print 하도록 구현
 
-{% highlight swift %}
+```swift
 print("onCompleted")
 #=> "onCompleted" 출력
-{% endhighlight %}
+```
 
 **\#5. Disposed 발생시 동작하는 Closure**
 
@@ -151,10 +151,10 @@ Observable의 subscribe이 disposed 되는 경우 호출되는 closure
 
 문자열 "disposed" print 하도록 구현
 
-{% highlight swift %}
+```swift
 print("disposed")
 #=> "disposed" 출력
-{% endhighlight %}
+```
 
 **\#6. subscribe 해제를 위해 disposeBag에 등록**
 
@@ -173,9 +173,9 @@ subscribe의 기본 Cycle을 요약하면
 
 일반적으로 Observable의 subscribe의 경우 아래와 같이 onNext의 동작만 구현을 하는
 bind를 주로 사용한다.
-{% highlight swift %}
+```swift
 observable.bind(onNext: (String) -> Void)
-{% endhighlight %}
+```
 
 -
 
@@ -189,9 +189,9 @@ parameter로 전달한 DisposeBag 객체가 deinit되는 경우, 즉 DisposeBag 
 
 보통의 경우 UIViewController의 전역 변수로
 
-{% highlight swift %}
+```swift
 private let disposeBag: DisposeBag = DisposeBag()
-{% endhighlight %}
+```
 
 구현하고 해당 ViewController가 deinit 되는 경우 DisposeBag 객체가 deinit되면서
 
@@ -201,9 +201,9 @@ private let disposeBag: DisposeBag = DisposeBag()
 
 let이 아닌 var로 구현한 후
 
-{% highlight swift %}
+```swift
 disposeBag = DisposeBag()
-{% endhighlight %}
+```
 
 새로운 DisposeBag 객체를 생성해주면 기존 DisposeBag이 메모리에서 해제되며
 
