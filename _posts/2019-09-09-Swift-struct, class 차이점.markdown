@@ -151,6 +151,47 @@ print(testB.name)
 ```swift
 var testB = testA
 ```
-해당 코드가 호출될때 `reference` 참조가 발생하기 때문에 `testA` 와 `testB` 가 바라보는 객체는  
+해당 코드가 호출될때 `call by reference` 가 발생하기 때문에 `testA` 와 `testB` 가 바라보는 객체는  
 실질적으로는 동일한 객체를 바라보게 되어 `testB` 의 `name property` 값을 변경하면  
 `testA` 객체에도 영향이 가게 된다.
+
+<br>
+
+### `class` 의 특징
+
+`struct` 의 특징 `value copy` 에 대한 내용을 작성하면서  
+`class` 와 비교하기 위해 작성한 내용으로 `class` 의 특징 중 하나인  
+`call by reference` 를 이미 설명 했기 때문에 여기에서는 상속에대해 작성해본다.
+
+직접 코드를 작성하면서 확인 할 필요 없이 `swift` 기본 `class` 만 살펴봐도 상속에 대한 구조를 알 수 있다.  
+기본적으로 프로젝트를 생성하면 기본적으로 생성되어있는 화면인 `ViewController.swift` 를 확인해보면 아래와 같이 작성되어 있다.
+
+```swift
+class ViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        ...
+    }
+
+}
+```
+
+프로젝트 생성시 앱의 첫 화면이 되는 `ViewController` 클래스가 생성되어 있고  
+해당 클래스는 `UIViewController` 클래스를 상속 받아 구현되어 있다.  
+`UIViewController` 클래스는 개발자가 여러가지 `UI` 를 추가하여 개발 할 수 있도록 구현된  
+기본 클래스로 `UIViewController` 를 상속 받은 클래스를 구현해야만 생성 가능 한 것이 아닌  
+`UIViewController` 자체적으로 인스턴스 생성이 가능한 `class` 이다.  
+`UIViewController` 의 구조를 살펴보면  
+
+```swift
+open class UIViewController : UIResponder, NSCoding, UIAppearanceContainer, UITraitEnvironment, UIContentContainer, UIFocusEnvironment {
+    ...
+}
+```
+
+이와 같이 `UIViewController` 도 클래스인 `UIResponder` 를 상속 받고, 그외 필요한 기능을 구현하기 위한 `protocol` 들을 상속 받고 있는 것을 알 수 있다.  
+`swift` 에서는 `class` 의 단일 상속만 가능하고, `protocol` 의 경우 다중 상속이 가능하다.
+
+`class` 의 상속을 통해 공통된 기능의 확장(`override`) 과 추가가 가능하고,  
+상속 받은 클래스를 또 다시 상속하여 확장, 추가하는 것으로 다양한 기능의 구현이 가능하다.
